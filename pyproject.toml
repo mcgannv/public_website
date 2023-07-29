@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "website"
+version = "0.1.0"
+description = ""
+authors = ["mcgannv <mail@vilmcgann.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+flask = "^2.3.2"
+flask-sqlalchemy = "^3.0.3"
+flask-login = "^0.6.2"
+waitress = "^2.1.2"
+build = "^0.10.0"
+python-dotenv = "^1.0.0"
+wheel = "^0.40.0"
+gunicorn = "^20.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

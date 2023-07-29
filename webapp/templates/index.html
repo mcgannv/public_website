@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block topcontent %}
+    <div class="container-fluid p-0">
+        <div class="background-color p-3">
+            <div class="inner container-fluid">
+                <h1 id="name">Vil McGann</h1>
+                <h5 id="job">Software Engineer @ Fotosearch</h5>
+                <h6 id="caption">Implementing Practical Software Solutions, Iteration by Iteration</h6>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block bottomcontent %}
+    <div class="content container pt-3">
+        <div class="parent row py-4">
+            <div class="col-md-9 col-sm-12">
+                <div id="about" class="about-me">
+                    <div class="container text-start">
+                        <h3 class="section-header">Who I Am</h3>
+                        <p class="mt-2">
+                            Embarking on a daunting yet crucial fresh start in 2018, I transitioned from healthcare to
+                            the captivating world of programming. Today, fully immersed in this landscape, I have honed
+                            my coding skills and discovered a passion for crafting machine learning models, witnessing
+                            their real-world impact. Alongside, I explored diverse facets of programming, including
+                            designing robust architectures and scalable code. This transformative journey shaped my
+                            professional path and empowered me personally, teaching resilience and the pursuit of
+                            passions. I now seek opportunities to contribute to
+                            groundbreaking projects merging technology, creativity, and practical solutions
+                        </p>
+                    </div>
+                </div>
+                <div id="experiences" class="container text-start">
+                    <h3 class="section-header">Where I've Been</h3>
+                    <div class="row experience mt-2">
+                        <div class="col-3">
+                            May 2021 -- Present
+                        </div>
+                        <div class="col-9">
+                            <div>
+                                <span class="company secondary-color">Fotosearch</span><br>
+                                <span class="job-title">Software Engineer</span><br>
+                                <span class="description">
+                                    After transitioning from my role as an intern, I took on more
+                                    responsibilities with the company which include working with the customer
+                                    support department to create a better user experience on our websites. Developed a
+                                    neural machine translation
+                                    model that translated image titles and descriptions in over 10 languages and
+                                    transitioning our entire Dockerized environment to a Kubernetes cluster.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row experience">
+                        <div class="col-3">
+                            May 2020 -- May 2021
+                        </div>
+                        <div class="col-9">
+                            <div>
+                                <span class="company secondary-color">Fotosearch</span><br>
+                                <span class="job-title">Software Engineer Intern</span><br>
+                                <span class="description">
+                                    Migrated our backend framework from Django 2.0 to 3.2 along with Python 2.7 to 3.9,
+                                    updating dependencies and resolving deprecated features in accordance to Django and
+                                    Python documentation.
+                                    Developed a convolution neural network (CNN) model that can detect and rank images
+                                    submitted by contributors.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row experience">
+                        <div class="col-3">
+                            Aug 2022 -- Dec 2022
+                        </div>
+                        <div class="col-9">
+                            <div>
+                                <span class="company secondary-color">Bay Robotics - Whitefish Bay High School</span><br>
+                                <span class="job-title">Robotics Mentor</span><br>
+                                <span class="description">
+                                    Provided mentorship on software development best practices, code reviews, and
+                                    quality assurance. The team participated in Wisconsin FIRST Tech Challenge (FTC)
+                                    where the team has taken home the Control and Innovation award and competed in
+                                    the State Championship.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="projects" class="container text-start">
+                    <h3 class="section-header">What I've Done</h3>
+                    <div class="row mt-2">
+                        <div class="col-3">
+                            Video To Come
+                        </div>
+                        <div class="col-9">
+                            <div>
+                                <span class="project secondary-color">Dog Door Web App</span><br>
+                                <span class="description">
+                                    Wired my Raspberry Pi to a linear actuator to open and close my dog doors.
+                                    The web application was built using Flask and Nginx. To prevent exposing my
+                                    home network's IP address, I created a reverse proxy to a Google Cloud Virtual
+                                    Machine. I secured the web application with a secure log in using SQLAlchemy.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="sticky-top contact">
+                    <h3 class="section-header d-sm-none">Contact Me</h3>
+                    <h5 class="section-header d-none d-md-inline">Contact Me</h5>
+                    <ul class="list-group mt-2 contact-icons">
+                        <li class="list-group-item border-0">
+                            <a href="mailto:{{ email }}"><i class="icon fa-solid fa-envelope fa-2xl secondary-color"></i></a>
+                        </li>
+                        <li class="list-group-item border-0">
+                            <a href="https://www.linkedin.com/in/vilmcgann" target="_blank"><i class="icon fa-brands fa-linkedin fa-2xl secondary-color"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        window.onscroll = function () {
+            scrollFunction()
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                $('#name').css({'font-size': '1.3em', 'margin-bottom': '0'});
+                $('.inner').css('padding', '10px');
+                $('#job').hide();
+                $('#caption').hide();
+            } else {
+                $('#name').css({'font-size': '2.5em', 'margin-bottom': '0.5rem'});
+                $('.inner').css('padding', '30px');
+                $('#job').show();
+                $('#caption').show();
+            }
+        }
+
+        $('i.icon').on('mouseenter', function () {
+            $(this).addClass('fa-beat-fade');
+        });
+        $('i.icon').on('mouseleave', function () {
+            $(this).removeClass('fa-beat-fade');
+        })
+    </script>
+{% endblock %}

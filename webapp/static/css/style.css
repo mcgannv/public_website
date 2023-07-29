@@ -1,0 +1,94 @@
+body, .primary-color, .list-group-item, label {
+  color: #cbcbd4;
+}
+
+.header {
+  top: 0;
+  position: fixed;
+  color: #18206f;
+  width: 100%;
+  height: 200px;
+}
+
+#name, #job, #caption {
+  transition: 0.2s;
+}
+
+#name, .section-header {
+  font-family: "Montserrat", sans-serif;
+}
+
+.section-header {
+  border-bottom: #d4af37 2px dashed;
+  display: inline;
+}
+
+.secondary-color, .section-header {
+  color: #d4af37;
+}
+
+.inner {
+  border: #18206f 2px dashed;
+  padding: 30px;
+  transition: 0.2s;
+}
+
+body, nav, .list-group-item {
+  background-color: #18206f !important;
+}
+
+.background-color {
+  background-color: #cbcbd4;
+}
+
+.experience, .about-me {
+  padding-bottom: 40px;
+}
+
+.company, .project {
+  font-weight: bold;
+}
+
+.job-title {
+  font-style: italic;
+}
+
+.parent {
+  top: 200px;
+  border: #cbcbd4 2px dashed;
+}
+
+.contact {
+  top: 100px;
+  position: sticky;
+}
+
+.bottom-half {
+  padding-top: 215px;
+}
+
+.content {
+  width: 50%;
+}
+
+@media (max-width: 575.98px) {
+  .content {
+    width: 100%;
+    padding-top: 30px !important;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .contact {
+    padding-top: 30px;
+    text-align: left;
+  }
+  .contact-icons {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .contact-icons .list-group-item {
+    display: inline !important;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
