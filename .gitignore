@@ -11,5 +11,6 @@
 /venv
 .gitsecret/keys/random_seed
 database.db
+pizza.db
 /node_modules
 __pycache__

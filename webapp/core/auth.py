@@ -4,7 +4,7 @@ from werkzeug.security import check_password_hash
 
 from .models import User
 
-auth = Blueprint('auth', __name__)
+auth = Blueprint('auth', __name__, template_folder='templates')
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -22,7 +22,7 @@ def login():
             login_user(user, remember=remember)
             return redirect(url_for('main.controls'))
 
-    return render_template('login.html')
+    return render_template('main/login.html')
 
 
 @auth.route('/logout')
