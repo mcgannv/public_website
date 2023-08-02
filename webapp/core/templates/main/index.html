@@ -1,12 +1,14 @@
 {% extends "main/base.html" %}
 
 {% block topcontent %}
-    <div class="container-fluid p-0">
-        <div class="background-color header p-3">
-            <div class="inner container-fluid">
-                <h1 id="name">Vil McGann</h1>
-                <h5 id="job">Software Engineer @ Fotosearch</h5>
-                <h6 id="caption">Implementing Practical Software Solutions, Iteration by Iteration</h6>
+    <div class="top-half header">
+        <div class="container-fluid p-0">
+            <div class="background-color p-3">
+                <div class="inner container-fluid">
+                    <h1 id="name">Vil McGann</h1>
+                    <h5 id="job">Software Engineer @ Fotosearch</h5>
+                    <h6 id="caption">Implementing Practical Software Solutions, Iteration by Iteration</h6>
+                </div>
             </div>
         </div>
     </div>
@@ -113,10 +115,12 @@
                     <h5 class="section-header d-none d-md-inline">Contact Me</h5>
                     <ul class="list-group mt-2 contact-icons">
                         <li class="list-group-item border-0">
-                            <a href="mailto:{{ email }}"><i class="icon fa-solid fa-envelope fa-2xl secondary-color"></i></a>
+                            <a href="mailto:{{ email }}"><i
+                                    class="icon fa-solid fa-envelope fa-2xl secondary-color"></i></a>
                         </li>
                         <li class="list-group-item border-0">
-                            <a href="https://www.linkedin.com/in/vilmcgann" target="_blank"><i class="icon fa-brands fa-linkedin fa-2xl secondary-color"></i></a>
+                            <a href="https://www.linkedin.com/in/vilmcgann" target="_blank"><i
+                                    class="icon fa-brands fa-linkedin fa-2xl secondary-color"></i></a>
                         </li>
                     </ul>
                 </div>
