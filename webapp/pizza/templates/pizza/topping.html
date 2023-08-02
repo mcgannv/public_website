@@ -28,12 +28,12 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="addToppingModalLabel">Add New Topping</h1>
+                        <h1 class="modal-title fs-5" id="addToppingModalLabel" style="color: black;">Add New Topping</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form id="addForm" method="POST" action="{{ url_for('pizza.add_topping') }}">
+                    <form class="form" id="addForm" method="POST" action="{{ url_for('pizza.add_topping') }}">
                         <div class="modal-body">
-                            <input id="addTopping" type="text" name="name" placeholder="Name for Topping"/>
+                            <input id="addTopping" class="form-control" type="text" name="name" placeholder="Name for Topping"/>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -49,13 +49,13 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="editToppingModalLabel">Edit Topping</h1>
+                        <h1 class="modal-title fs-5" id="editToppingModalLabel" style="color: black;">Edit Topping</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form method="POST" action="{{ url_for('pizza.edit_topping') }}">
+                    <form class="form" method="POST" action="{{ url_for('pizza.edit_topping') }}">
                         <div class="modal-body">
                             <input id="editToppingId" type="hidden" name="toppingId"/>
-                            <input id="editTopping" type="text" name="name"/>
+                            <input id="editTopping" class="form-control" type="text" name="name"/>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -71,13 +71,13 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="deleteToppingModalLabel">Delete Topping</h1>
+                        <h1 class="modal-title fs-5" id="deleteToppingModalLabel" style="color: black;">Delete Topping</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form method="POST" action="{{ url_for('pizza.delete_topping') }}">
+                    <form class="form" method="POST" action="{{ url_for('pizza.delete_topping') }}">
                         <input type="hidden" id="deleteToppingId" name="toppingId">
                         <div class="modal-body">
-                            <p>Are you sure you want to delete <span id="toppingName"></span>?</p>
+                            <p style="color: black;">Are you sure you want to delete <span id="toppingName"></span>?</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
