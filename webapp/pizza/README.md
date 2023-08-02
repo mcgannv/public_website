@@ -41,5 +41,36 @@ flask --app webapp run
 ## View Pizza Page
 In your browser, go to http://127.0.0.1:5000/pizza
 
-# Different Virtual Environment
-If you have Pip installed, create a new virtual environment that you know how, and you can pip install all the packages inside pyproject.toml.
+# Python's Virtual Environment
+If you are having issues creating using Poetry, you can run the app with python's virtual environment.
+## Navigate to Project Directory
+```shell
+cd ~/website <or where you saved project>
+```
+
+```shell
+python -m venv pizzavenv
+```
+
+## Activate Virtual Environment
+```shell
+source pizzavenv/bin/activate
+```
+
+## Download and Install pip
+```shell
+python get-pip.py
+```
+
+## Install Packages
+```shell
+pip install flask flask-sqlalchemy flask-login build python-dotenv wheel gunicorn wtforms-alchemy
+```
+
+## Start Flask App
+```shell
+flask --app webapp run
+```
+
+## View Pizza Page
+In your browser, go to http://127.0.0.1:5000/pizza
