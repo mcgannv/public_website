@@ -1,11 +1,14 @@
-<h2>Pizzas</h2>
+<h2 class="pt-4">Pizzas</h2>
 <div class="row col-md-6 offset-md-3">
     <div class="col-6">
-        <select id="pizzas" class="form-select" multiple aria-label="multiple select">
-            {% for pizza in pizzas %}
-                <option class="pizza" value="{{ pizza.id }}" data-name="{{ pizza.name }}">{{ pizza.name }}</option>
-            {% endfor %}
-        </select>
+    <h6>Pizza List</h6>
+        <div class="pb-3">
+            <select id="pizzas" class="form-select" multiple aria-label="multiple select">
+                {% for pizza in pizzas %}
+                    <option class="pizza" value="{{ pizza.id }}" data-name="{{ pizza.name }}">{{ pizza.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
         <button type="button" id="add" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPizzaModal">
             Add
         </button>
@@ -21,12 +24,13 @@
         </button>
     </div>
     <div class="col-6">
+    <h6>Toppings</h6>
         <div id="pizzaToppings">
         </div>
     </div>
 
     <div class="modal fade" id="addPizzaModal" tabindex="-1" aria-labelledby="addPizzaModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="addPizzaModalLabel">Create New Pizza</h1>
@@ -35,17 +39,20 @@
                 <form id="addForm" method="POST" action="{{ url_for('pizza.add_pizza') }}">
                     <div class="modal-body">
                         <input id="addPizza" class="form-control" type="text" name="name" placeholder="Name for Pizza"/>
+                        <div class="pt-2">
+                        <h6>Toppings</h6>
                         {% for topping in toppings %}
-                            <div class="form-check">
+                            <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="checkbox" value="{{ topping.id }}"
-                                       id="{{ topping.id }}" name="topping">
+                                       id="pizza-{{ topping.id }}" name="topping"/>
                                 <label class="form-check-label" for="{{ topping.id }}">{{ topping.name }}</label>
                             </div>
                         {% endfor %}
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <input type="submit" id="add" class="btn btn-primary" name="add" value="Add Topping"/>
+                        <input type="submit" id="add" class="btn btn-primary" name="add" value="Create Pizza"/>
                     </div>
                 </form>
             </div>
@@ -53,23 +60,26 @@
     </div>
 
     <div class="modal fade" id="editPizzaModal" tabindex="-1" aria-labelledby="editPizzaModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="editPizzaModalLabel">Edit Pizza</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="{{ url_for('pizza.edit_pizza') }}">
+                <form class="form" method="POST" action="{{ url_for('pizza.edit_pizza') }}">
                     <div class="modal-body edit">
                         <input id="editPizzaId" type="hidden" name="pizzaId"/>
                         <input id="editPizza" type="text" name="name"/>
+                        <div class="pt-2">
+                        <h6>Toppings</h6>
                         {% for topping in toppings %}
-                            <div class="form-check">
+                            <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="checkbox" value="{{ topping.id }}"
                                        id="pizza-{{ topping.id }}" name="topping"/>
                                 <label class="form-check-label" for="{{ topping.id }}">{{ topping.name }}</label>
                             </div>
                         {% endfor %}
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -82,7 +92,7 @@
 
     <div class="modal fade" id="deletePizzaModal" tabindex="-1" aria-labelledby="deletePizzaModalLabel"
          aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="deletePizzaModalLabel">Delete Pizza</h1>
@@ -132,8 +142,6 @@
                 let selected = $('option.pizza[selected="selected"]');
                 $('#editPizza').val(selected.data('name'));
                 $('#editPizzaId').val(selected.attr('value'));
-                selected.attr('selected', false);
-                $(this).attr('selected', 'selected');
                 $.ajax({
                     url: "{{ url_for('pizza.pizza_info') }}",
                     method: 'POST',

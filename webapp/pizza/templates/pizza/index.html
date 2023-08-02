@@ -1,89 +1,8 @@
 {% extends "main/base.html" %}
 
 {% block topcontent %}
-    <h1>Pizza</h1>
-
-    <h2>Toppings</h2>
-    <div class="col-md-6 offset-md-3">
-        <select id="toppings" class="form-select" multiple aria-label="multiple select">
-            {% for topping in toppings %}
-                <option class="topping" value="{{ topping.id }}" data-name="{{ topping.name }}">{{ topping.name }}</option>
-            {% endfor %}
-        </select>
-        <button type="button" id="add" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addToppingModal">
-            Add
-        </button>
-        <button type="button" id="edit" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editToppingModal"
-                disabled>
-            Edit
-        </button>
-        <button type="button" id="delete" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteToppingModal"
-                disabled>
-            Remove
-        </button>
-
-        <div class="modal fade" id="addToppingModal" tabindex="-1" aria-labelledby="addToppingModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="addToppingModalLabel">Add New Topping</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form id="addForm" method="POST" action="{{ url_for('pizza.add_topping') }}">
-                        <div class="modal-body">
-                            <input id="addTopping" type="text" name="name"/>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <input type="submit" id="add" class="btn btn-primary" name="add" value="Add Topping"/>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="editToppingModal" tabindex="-1" aria-labelledby="editToppingModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="editToppingModalLabel">Edit Topping</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form method="POST" action="{{ url_for('pizza.edit_topping') }}">
-                        <div class="modal-body">
-                            <input id="editToppingId" type="hidden" name="toppingId"/>
-                            <input id="editTopping" type="text" name="name"/>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <input type="submit" class="btn btn-primary" name="edit" value="Submit"/>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="deleteToppingModal" tabindex="-1" aria-labelledby="deleteToppingModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="deleteToppingModalLabel">Delete Topping</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form method="POST" action="{{ url_for('pizza.delete_topping') }}">
-                        <input type="hidden" id="deleteToppingId" name="toppingId">
-                        <div class="modal-body">
-                            <p>Are you sure you want to delete <span id="toppingName"></span>?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <input type="submit" class="btn btn-danger" name="add" value="Delete"/>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    <h1>Pizza App</h1>
+    {% include 'pizza/topping.html' %}
 {% endblock %}
 
 {% block bottomcontent %}
@@ -92,26 +11,4 @@
 
 {% block js %}
     {{ super() }}
-    <script type="application/javascript">
-        $(function () {
-            $('option.topping').on('click', function () {
-                $('option.topping[selected="selected"]').attr('selected', false);
-                $(this).attr('selected', 'selected');
-                $('#edit').prop('disabled', false);
-                $('#delete').prop('disabled', false);
-            });
-
-            $('#edit').on('click', function () {
-                let selected = $('option[selected="selected"]');
-                $('#editTopping').val(selected.data('name'));
-                $('#editToppingId').val(selected.attr('value'));
-            });
-
-            $('#delete').on('click', function () {
-                let selected = $('option[selected="selected"]');
-                $('#toppingName').text(selected.data('name'));
-                $('#deleteToppingId').val(selected.attr('value'));
-            });
-        });
-    </script>
 {% endblock %}

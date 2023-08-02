@@ -17,19 +17,11 @@ def index():
         pizzas=pizzas,
     )
 
-# @pizza.route('/get_modal', methods=['GET', 'POST'])
-# def get_modal():
-#     action = request.form.get('action')
-#     print(action)
-#     return jsonify({
-#         'data': 'test'
-#     })
-
 @pizza.route('/add_topping', methods=['GET', 'POST'])
 def add_topping():
     topping = Topping(name=request.form.get('name').lower())
-    topping_exists = db.session.query(Topping).filter_by(name=topping.name).first()
-    if not topping_exists:
+    # topping_exists = db.session.query(Topping).filter_by(name=topping.name).first()
+    if not is_exists(Topping, topping.name):
         db.session.add(topping)
         db.session.commit()
     return redirect(url_for('pizza.index'))
@@ -38,6 +30,8 @@ def add_topping():
 @pizza.route('/edit_topping', methods=['GET', 'POST'])
 def edit_topping():
     name = request.form.get('name').lower()
+    if is_exists(Topping, name):
+        return redirect(url_for('pizza.index'))
     topping_id = request.form.get('toppingId')
     topping = Topping.query.filter_by(id=topping_id).first()
     topping.name = name
@@ -56,11 +50,10 @@ def delete_topping():
 
 @pizza.route('/add_pizza', methods=['GET', 'POST'])
 def add_pizza():
-    pizza = Pizza(name=request.form.get('name').lower())
-    pizza_exists = db.session.query(Pizza).filter_by(name=pizza.name).first()
-    if pizza_exists:
+    name = request.form.get('name').lower()
+    if is_exists(Pizza, name):
         return redirect(url_for('pizza.index'))
-
+    pizza = Pizza(name=name)
     toppings = request.form.getlist('topping')
     toppings.sort()
     all_pizzas = Pizza.query.all()
@@ -81,14 +74,15 @@ def add_pizza():
 
 @pizza.route('/edit_pizza', methods=['GET', 'POST'])
 def edit_pizza():
-    pizza = Pizza.query.filter_by(id=request.form.get('pizzaId').lower()).first()
-    pizza_exists = db.session.query(Pizza).filter_by(name=pizza.name).first()
-    if pizza_exists:
+    name = request.form.get('name').lower()
+    pizza = Pizza.query.filter_by(id=request.form.get('pizzaId')).first()
+    pizza_exists = db.session.query(Pizza).filter_by(name=name).first()
+    if pizza_exists and pizza.id != pizza_exists.id:
         return redirect(url_for('pizza.index'))
 
     toppings = request.form.getlist('topping')
     toppings.sort()
-    all_pizzas = Pizza.query.all()
+    all_pizzas = Pizza.query.filter(Pizza.id != pizza.id)
     for p in all_pizzas:
         pizza_toppings = [str(topping.id) for topping in p.toppings]
         pizza_toppings.sort()
@@ -99,7 +93,7 @@ def edit_pizza():
     for topping_id in toppings:
         topping = db.session.query(Topping).filter_by(id=topping_id).first()
         pizza.toppings.append(topping)
-
+    pizza.name = name
     db.session.add(pizza)
     db.session.commit()
     return redirect(url_for('pizza.index'))
@@ -123,3 +117,6 @@ def pizza_info():
         'topping_ids': [topping.id for topping in pizza.toppings]
     })
 
+
+def is_exists(model, name):
+    return db.session.query(model).filter_by(name=name).first()
